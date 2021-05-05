@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container />
+  <Container :instagramData="instagramData" />
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -21,10 +21,17 @@
 
 <script>
 import Container from "./components/Container";
+import instagramData from "./instagramData";
+
 export default {
   name: "App",
   components: {
     Container,
+  },
+  data() {
+    return {
+      instagramData,
+    };
   },
 };
 </script>

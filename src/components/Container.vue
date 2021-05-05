@@ -1,8 +1,6 @@
 <template>
   <div>
-    <Post />
-    <Post />
-    <Post />
+    <Post :instagramData="instagramData" />
   </div>
 </template>
 
@@ -13,6 +11,9 @@ export default {
   name: "Container",
   components: {
     Post,
+  },
+  props: {
+    instagramData: Array,
   },
 };
 </script>
