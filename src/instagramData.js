@@ -26,7 +26,7 @@ export default [
       likes: 49,
       date: "Apr 4",
       liked: false,
-      content: "bro, look at my dog",
+      content: "bro, my pet better than yours",
       filter: "lofi"
     }
   ]

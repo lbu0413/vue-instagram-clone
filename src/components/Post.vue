@@ -5,13 +5,22 @@
     :key="index"
   >
     <div class="post-header">
-      <div class="profile"></div>
+      <div
+        class="profile"
+        :style="{ backgroundImage: `url(${instagramDatum.userImage})` }"
+      ></div>
       <span class="profile-name">{{ instagramDatum.name }}</span>
     </div>
-    <div class="post-body"></div>
+    <div
+      class="post-body"
+      :style="{ backgroundImage: `url(${instagramDatum.postImage})` }"
+    ></div>
     <div class="post-content">
-      <p>likes: {{ instagramDatum.likes }}</p>
-      <p><strong></strong>{{ instagramDatum.content }}</p>
+      <p>{{ instagramDatum.likes }} Likes</p>
+      <p>
+        <strong>{{ instagramDatum.name }}</strong>
+        {{ instagramDatum.content }}
+      </p>
       <p class="date">{{ instagramDatum.date }}</p>
     </div>
   </div>

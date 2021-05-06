@@ -4,16 +4,30 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 1" @click="step++">Next</li>
+      <li v-if="step == 2" @click="publish">Post</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :instagramData="instagramData" />
-
+  <Container
+    :image="image"
+    :upload="upload"
+    :step="step"
+    :instagramData="instagramData"
+    @write="message = $event"
+  />
+  <button class="more" @click="more">Show more</button>
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input
+        @change="upload"
+        multiple
+        type="file"
+        accept="image/*"
+        id="file"
+        class="inputfile"
+      />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -22,6 +36,7 @@
 <script>
 import Container from "./components/Container";
 import instagramData from "./instagramData";
+import axios from "axios";
 
 export default {
   name: "App",
@@ -31,7 +46,45 @@ export default {
   data() {
     return {
       instagramData,
+      buttonClick: 0,
+      step: 0,
+      image: "",
+      message: "",
+      date: new Date(Date.now()),
     };
+  },
+  methods: {
+    more() {
+      axios
+        .get(`https://codingapple1.github.io/vue/more${this.buttonClick}.json`)
+        .then((res) => {
+          this.instagramData.push(res.data);
+          this.buttonClick++;
+        })
+        .catch((err) => console.log(err));
+    },
+    upload(e) {
+      let file = e.target.files;
+      console.log(file[0]);
+      let url = URL.createObjectURL(file[0]);
+      console.log(url);
+      this.image = url;
+      this.step++;
+    },
+    publish() {
+      let myData = {
+        name: "Wook Lee",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.image,
+        likes: 0,
+        date: this.date.toDateString(),
+        liked: false,
+        content: this.message,
+        filter: "perpetua",
+      };
+      instagramData.unshift(myData);
+      this.step = 0;
+    },
   },
 };
 </script>
@@ -56,10 +109,11 @@ ul {
 .header {
   width: 100%;
   height: 40px;
-  background-color: white;
-  padding-bottom: 8px;
+  background-color: whitesmoke;
+  padding-bottom: 10px;
   position: sticky;
   top: 0;
+  margin-bottom: 2rem;
 }
 .header-button-left {
   color: skyblue;
@@ -81,7 +135,8 @@ ul {
   position: sticky;
   bottom: 0;
   padding-bottom: 10px;
-  background-color: white;
+  background-color: whitesmoke;
+  margin-top: 2rem;
 }
 .footer-button-plus {
   width: 80px;
@@ -112,5 +167,23 @@ ul {
   position: relative;
   border-right: 1px solid #eee;
   border-left: 1px solid #eee;
+}
+
+.more {
+  margin: 5px auto;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: 1px solid whitesmoke;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+label {
+  font-size: 2rem;
+  cursor: pointer;
 }
 </style>
