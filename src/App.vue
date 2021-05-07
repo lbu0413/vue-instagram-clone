@@ -116,11 +116,11 @@ ul {
 .header {
   width: 100%;
   height: 40px;
+  margin-bottom: 0;
   background-color: whitesmoke;
   padding-bottom: 10px;
   position: sticky;
   top: 0;
-  margin-bottom: 2rem;
 }
 .header-button-left {
   color: skyblue;
