@@ -48,7 +48,7 @@ export default {
     return {
       instagramData,
       buttonClick: 0,
-      step: 0,
+      step: 3,
       image: "",
       message: "",
       date: new Date(Date.now()),
