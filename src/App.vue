@@ -15,6 +15,7 @@
     :upload="upload"
     :step="step"
     :instagramData="instagramData"
+    :filter="filter"
     @write="message = $event"
   />
   <button class="more" @click="more">Show more</button>
@@ -51,7 +52,13 @@ export default {
       image: "",
       message: "",
       date: new Date(Date.now()),
+      selectedFilter: "",
     };
+  },
+  mounted() {
+    this.emitter.on("filterFunc", (filter) => {
+      this.selectedFilter = filter;
+    });
   },
   methods: {
     more() {
@@ -80,7 +87,7 @@ export default {
         date: this.date.toDateString(),
         liked: false,
         content: this.message,
-        filter: "perpetua",
+        filter: this.selectedFilter,
       };
       instagramData.unshift(myData);
       this.step = 0;

@@ -1,12 +1,24 @@
 <template>
-  <div class="filter-item" :style="`background-image: url(${image})`"></div>
+  <div
+    :class="filter + ' filter-item'"
+    :style="`background-image: url(${image})`"
+    @click="fireFilter"
+  >
+    <slot></slot>
+  </div>
 </template>
 
 <script>
 export default {
   name: "FilterBox",
+  methods: {
+    fireFilter() {
+      this.emitter.emit("filterFunc", this.filter);
+    },
+  },
   props: {
     image: String,
+    filter: String,
   },
 };
 </script>
@@ -21,5 +33,6 @@ export default {
   color: white;
   background-size: cover;
   background-position: center;
+  cursor: pointer;
 }
 </style>

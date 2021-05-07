@@ -13,6 +13,7 @@
     </div>
     <div
       class="post-body"
+      :class="instagramDatum.filter"
       :style="{ backgroundImage: `url(${instagramDatum.postImage})` }"
     ></div>
     <div class="post-content">

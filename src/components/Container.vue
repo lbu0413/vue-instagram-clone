@@ -4,6 +4,7 @@
 
     <div v-if="step === 1">
       <div
+        :class="selectedFilter"
         class="upload-image"
         :style="{ backgroundImage: `url(${image})` }"
       ></div>
@@ -12,13 +13,16 @@
           v-for="(filter, index) in filters"
           :key="index"
           :image="image"
-          :class="filter"
-        ></FilterBox>
+          :filter="filter"
+        >
+          {{ filter }}
+        </FilterBox>
       </div>
     </div>
 
     <div v-if="step === 2">
       <div
+        :class="selectedFilter"
         class="upload-image"
         :style="{ backgroundImage: `url(${image})` }"
       ></div>
@@ -49,6 +53,12 @@ export default {
     step: Number,
     upload: Function,
     image: String,
+    filter: String,
+  },
+  mounted() {
+    this.emitter.on("filterFunc", (filter) => {
+      this.selectedFilter = filter;
+    });
   },
   data() {
     return {
@@ -80,6 +90,7 @@ export default {
         "willow",
         "xpro2",
       ],
+      selectedFilter: "",
     };
   },
 };
