@@ -60,6 +60,11 @@ export default {
       this.selectedFilter = filter;
     });
   },
+  computed: {
+    name() {
+      return this.$store.state.name;
+    },
+  },
   methods: {
     more() {
       axios

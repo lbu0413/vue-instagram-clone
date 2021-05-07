@@ -15,9 +15,10 @@
       class="post-body"
       :class="instagramDatum.filter"
       :style="{ backgroundImage: `url(${instagramDatum.postImage})` }"
+      @click="$store.commit('likesUpdate')"
     ></div>
     <div class="post-content">
-      <p>{{ instagramDatum.likes }} Likes</p>
+      <p>{{ $store.state.likes }} Likes</p>
       <p>
         <strong>{{ instagramDatum.name }}</strong>
         {{ instagramDatum.content }}
