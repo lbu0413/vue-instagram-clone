@@ -1,7 +1,7 @@
 <template>
   <div style="padding : 10px">
     <h4>Followers</h4>
-    <input placeholder="🔍" />
+    <input v-model="haha" @input="search" placeholder="🔍" />
     <div
       class="post-header"
       v-for="(follower, index) in followers"
@@ -22,6 +22,7 @@ import axios from "axios";
 
 export default {
   name: "MyPage",
+
   setup() {
     let followers = ref([]);
 
@@ -31,7 +32,13 @@ export default {
       });
     });
 
-    return { followers };
+    function search() {
+      return followers.value.filter((follower) => {
+        follower.name === event.target.value;
+      });
+    }
+
+    return { followers, search };
   },
 };
 </script>
